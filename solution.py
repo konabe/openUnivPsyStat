@@ -38,6 +38,7 @@ def problem_1_3(data):
 def main():
   df = pd.read_csv('./times.csv', header=None)
   data = np.array(df[0])
+  print(data)
 
   problem_1_1(data)
   problem_1_2(data)
