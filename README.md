@@ -3,10 +3,10 @@
 放送大学の学部生向けの科目「心理統計法」の課題をPythonで自動的に回答できるようなプログラムです。
 READMEに課題の結果の考察等を掲載しています。
 
-## 使用技術
+## 使用技術 (Link to its Reference if needed)
 
 - Python
-  - Numpy, Pandas, PyStan
+  - Numpy, Pandas, [PyStan](https://pystan.readthedocs.io/en/latest/api.html) [(Stan)](https://stan-ja.github.io/gh-pages-html/), [Arviz](https://arviz-devs.github.io/arviz/api/index.html)
 
 # データ
 - 何も見ずに30秒が経った思ったところで止めた時の時間データ(30秒の知覚時間)
@@ -84,3 +84,7 @@ thetaは正規分布の平均、sigmaは正規分布の標準偏差、X_predは�
 
 僕のこれからの30秒の知覚時間は、95%の確率で27.48 ~ 33.51に入ると予測された。
 標本中でも同じような確率で33.51を超えていることも意味があるのか？
+
+# 第四章
+## 課題
+### 4-1 (RQ6)
