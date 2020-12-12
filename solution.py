@@ -39,13 +39,21 @@ def problem_1_3(data):
   sigma = np.std(data)
   print("95%予測区間: {0} ~ {1}".format(mu - 1.96*sigma, mu + 1.96*sigma))
 
-# 2_1 平均の点推定
-def problem_2_1(data):
+# 3_1 平均の点推定
+def problem_3(data):
   sm = pystan.StanModel(file='model.stan')
   d = {'N': len(data), 'X': data}
   fit = sm.sampling(d)
   print(fit.stansummary(probs=(alpha/2, alpha, 0.5, 1-alpha, 1-alpha/2), digits_summary=2))
   arviz.plot_trace(fit)
+
+# 4 生成量
+def problem_4(data):
+  sm = pystan.StanModel(file='model_gq.stan')
+  d = {'N': len(data), 'X': data, 'c': 30}
+  fit = sm.sampling(d)
+  print(fit.stansummary())
+  arviz.plot_trace(fit, var_names=("Var", "Coeff", "DeltaC"))
 
 def main():
   df = pd.read_csv('./times.csv', header=None)
@@ -56,7 +64,8 @@ def main():
   #problem_1_2(data)
   #problem_1_3(data)
 
-  problem_2_1(data)
+  #problem_3(data)
+  problem_4(data)
 
   plt.show()
 
