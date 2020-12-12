@@ -53,7 +53,7 @@ def problem_4(data):
   d = {'N': len(data), 'X': data, 'c': 30}
   fit = sm.sampling(d)
   print(fit.stansummary())
-  arviz.plot_trace(fit, var_names=("Var", "Coeff", "DeltaC"))
+  arviz.plot_trace(fit, var_names=("Var", "Coeff", "DeltaC", "QFPer", "ObsSec", "RatioC"))
 
 def main():
   df = pd.read_csv('./times.csv', header=None)
