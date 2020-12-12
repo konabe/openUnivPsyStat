@@ -1,8 +1,12 @@
 import numpy as np
 import pandas as pd
+import pystan
+import arviz
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 mpl.use('tkagg')  # to avoid Big Sur's bug 
+
+alpha = 0.05
 
 # 1_1 度数分布表、ヒストグラム
 def problem_1_1(data):
@@ -35,14 +39,24 @@ def problem_1_3(data):
   sigma = np.std(data)
   print("95%予測区間: {0} ~ {1}".format(mu - 1.96*sigma, mu + 1.96*sigma))
 
+# 2_1 平均の点推定
+def problem_2_1(data):
+  sm = pystan.StanModel(file='model.stan')
+  d = {'N': len(data), 'X': data}
+  fit = sm.sampling(d)
+  print(fit.stansummary(probs=(alpha/2, alpha, 0.5, 1-alpha, 1-alpha/2), digits_summary=2))
+  arviz.plot_trace(fit)
+
 def main():
   df = pd.read_csv('./times.csv', header=None)
   data = np.array(df[0])
   print(data)
 
-  problem_1_1(data)
-  problem_1_2(data)
-  problem_1_3(data)
+  #problem_1_1(data)
+  #problem_1_2(data)
+  #problem_1_3(data)
+
+  problem_2_1(data)
 
   plt.show()
 
